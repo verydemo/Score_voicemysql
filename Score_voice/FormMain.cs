@@ -62,11 +62,21 @@ namespace Score_voice
             progressBar1.MouseClick += ProgressBar1_Click;
             label14.MouseClick += Label_MouseClick;
             label15.MouseClick += Label_MouseClick;
+            cbopici.SelectedValueChanged += Cbopici_SelectedValueChanged;
+            setbtn(cbopici.Text,1);
         }
 
-        private void setbtn()
+        private void Cbopici_SelectedValueChanged(object sender, EventArgs e)
         {
-            string batchdesc = session.listenScore.batchdesc;
+            setbtn(((ComboBox)sender).Text,1);
+        }
+
+        private void setbtn(string batchdesc="",int type=0)
+        {
+            if (type == 0)
+            {
+               batchdesc = session.listenScore.batchdesc;
+            }
             switch (batchdesc)
             {
                 case "客观0主观有":
@@ -88,6 +98,11 @@ namespace Score_voice
                     btnrecheck.Enabled = false;
                     btnzero.Enabled = false;
                     btnex.Enabled = true;
+                    break;
+                case "0分题":
+                    btnrecheck.Enabled = true;
+                    btnzero.Enabled = false;
+                    btnex.Enabled = false;
                     break;
                 default:
                     btnrecheck.Enabled = true;
